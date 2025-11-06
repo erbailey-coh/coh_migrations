@@ -1,0 +1,139 @@
+---
+title: Draft schema contract – proc_cfin_hospital_account_research_volume
+author: codex-gpt5
+compiled_on: 2025-11-06
+---
+
+```yaml
+version: 2
+
+models:
+  - name: cfin_hospital_account_research_volume
+    description: |
+      Research-linked hospital accounts with charge volume metrics aggregated to one row per
+      patient hospital account. Supports clinical finance monitoring of study billing activity.
+    config:
+      contract:
+        enforced: true
+    meta:
+      grain: hospital_account_id_patient
+      primary_keys:
+        - hospital_account_id_patient
+    columns:
+      - name: hospital_account_id_patient
+        description: |
+          Hospital account identifier for the patient-facing (non-research) account that originated
+          qualifying research transactions.
+        data_type: number(38,0)
+        tests:
+          - unique
+          - not_null
+        meta:
+          is_phi: true
+          intended_consumers:
+            - internal_curated
+      - name: hospital_account_id_research
+        description: |
+          Pipe-delimited list of research hospital account identifiers tied to the patient hospital
+          account in this row, ordered ascending.
+        data_type: varchar
+        meta:
+          is_phi: true
+          intended_consumers:
+            - internal_curated
+      - name: inpatient_room_quantity
+        description: Count of inpatient room charge units (revenue codes 110-219) billed to research accounts.
+        data_type: number(38,0)
+      - name: em_inperson_quantity
+        description: Count of in-person evaluation and management billed units flagged as E&M charges.
+        data_type: number(38,0)
+      - name: em_inperson_transaction_quantity
+        description: Charge line count for in-person E&M transactions with non-zero amounts.
+        data_type: number(38,0)
+      - name: em_virtual_quantity
+        description: Count of virtual/telehealth E&M billed units (revenue code 0780 or POS/modifier 95 logic).
+        data_type: number(38,0)
+      - name: em_virtual_transaction_quantity
+        description: Charge line count for virtual E&M transactions with non-zero amounts.
+        data_type: number(38,0)
+      - name: infusion_chemo_quantity
+        description: Count of infusion and chemotherapy billed units (CPT 96409, 96413, 96416, 96360, 96365, 96374).
+        data_type: number(38,0)
+      - name: infusion_quantity
+        description: Count of infusion billed units (CPT 96360, 96365, 96374).
+        data_type: number(38,0)
+      - name: chemo_quantity
+        description: Count of chemotherapy billed units (CPT 96409, 96413, 96416).
+        data_type: number(38,0)
+      - name: labs_quantity
+        description: Count of laboratory billed units (hospital revenue codes 0300-0309).
+        data_type: number(38,0)
+      - name: pathology_quantity
+        description: Count of pathology billed units (hospital revenue codes 0310-0319).
+        data_type: number(38,0)
+      - name: imaging_ct_quantity
+        description: Count of CT imaging billed units (hospital revenue codes 0350-0359).
+        data_type: number(38,0)
+      - name: imaging_mri_quantity
+        description: Count of MRI imaging billed units (hospital revenue codes 0610-0614).
+        data_type: number(38,0)
+      - name: imaging_mra_quantity
+        description: Count of MRA imaging billed units (hospital revenue codes 0615-0618).
+        data_type: number(38,0)
+      - name: imaging_pet_quantity
+        description: Count of PET imaging billed units (hospital revenue code 0404).
+        data_type: number(38,0)
+      - name: imaging_ultrasound_quantity
+        description: Count of ultrasound imaging billed units (hospital revenue code 0402).
+        data_type: number(38,0)
+      - name: imaging_x_ray_quantity
+        description: Count of X-ray imaging billed units (hospital revenue codes 0320, 0324).
+        data_type: number(38,0)
+      - name: imaging_mammography_diagnostic_quantity
+        description: Count of diagnostic mammography billed units (hospital revenue code 0401).
+        data_type: number(38,0)
+      - name: imaging_mammography_screening_quantity
+        description: Count of screening mammography billed units (hospital revenue code 0403).
+        data_type: number(38,0)
+      - name: imaging_nuclear_medicine_quantity
+        description: Count of nuclear medicine imaging billed units (hospital revenue codes 0341, 0342).
+        data_type: number(38,0)
+      - name: imaging_quantity
+        description: Total imaging billed units across hospital revenue codes and professional imaging CPT subgroups.
+        data_type: number(38,0)
+      - name: observation_hours_quantity
+        description: Count of observation hour billed units (hospital revenue code 0762).
+        data_type: number(38,0)
+      - name: rad_onc_delivery_quantity
+        description: Count of radiation oncology delivery billed units using legacy charge code groupings.
+        data_type: number(38,0)
+      - name: rad_onc_quantity
+        description: Count of radiation oncology billed units combining hospital revenue code 0333 and professional CPT ranges.
+        data_type: number(38,0)
+      - name: rad_onc_3d_quantity
+        description: Count of 3D radiation oncology billed units (hospital billing procedure code list).
+        data_type: number(38,0)
+      - name: rad_onc_imrt_quantity
+        description: Count of IMRT radiation oncology billed units (hospital billing procedure code list).
+        data_type: number(38,0)
+      - name: rad_onc_srs_sbrt_quantity
+        description: Count of SRS/SBRT radiation oncology billed units (hospital billing procedure code list).
+        data_type: number(38,0)
+      - name: rad_onc_hdr_quantity
+        description: Count of HDR radiation oncology billed units (hospital billing procedure code list).
+        data_type: number(38,0)
+      - name: rad_onc_iort_quantity
+        description: Count of IORT radiation oncology billed units (hospital billing procedure code 33377424).
+        data_type: number(38,0)
+      - name: surgery_one_hour_quantity
+        description: Count of surgery 1-hour billed units (hospital billing procedure codes 36000001, 36000002, 36000003, 36000004, 36000005, 36000024, 36120660).
+        data_type: number(38,0)
+      - name: vad_quantity
+        description: Count of vascular access device billed units (hospital cost centers 7509000/7640005 with CPT 36591 or 36592).
+        data_type: number(38,0)
+      - name: update_dtm
+        description: Timestamp when this model was refreshed.
+        data_type: timestamp_ntz
+        tests:
+          - not_null
+```

@@ -91,6 +91,9 @@ The agent must use the code in the following folders to understand both the lega
 > **Unified-first source hierarchy (2025-11-06 · codex-gpt5)**  
 > Within `ae-enterprise-dbt`, prioritize models in `models/unified/`—especially relations prefixed `unified_`. Only fall back to curated marts if the unified layer lacks required attributes, and explore other directories or `cfin-data-models` sources last. Document any exceptions in migration notes.
 
+> **Migration work area only (2025-11-06 · codex-gpt5)**  
+> Treat `/ae-enterprise-dbt`, `/cfin-data-models`, and `/docs` as read-only references during migrations. Draft new SQL, YAML, and documentation inside the relevant `/migrations/<object>/` subdirectory. Move vetted artifacts into the project trees only after review and approval.
+
 ### Required actions before any change
 
 1. **Inventory structures**

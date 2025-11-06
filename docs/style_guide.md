@@ -222,3 +222,7 @@ Adhere to these rules to produce code that can be merged with minimal rework.
 ## 11) Source selection hierarchy
 
 * 2025-11-06 (codex-gpt5) — When working inside `ae-enterprise-dbt`, prefer models in `models/unified/` (relations named `unified_*`). If the unified layer lacks the needed fields, step down to the curated `marts/` directory, and reach for other project sources only as a last resort. Capture any exceptions in migration documentation.
+
+## 12) Migration staging protocol
+
+* 2025-11-06 (codex-gpt5) — Treat `/ae-enterprise-dbt`, `/cfin-data-models`, and `/docs` as reference libraries while designing migrations. Create or revise SQL, YAML, and supporting notes in the active `/migrations/<object>/` workspace until changes are reviewed and approved for promotion into the main projects.
