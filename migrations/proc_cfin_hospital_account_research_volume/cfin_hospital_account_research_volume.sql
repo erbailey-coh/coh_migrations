@@ -1,7 +1,3 @@
--- Draft model SQL for review – not yet staged in dbt project
--- Source: Legacy proc_cfin_hospital_account_research_volume migration
--- Author: codex-gpt5 (2025-11-06)
-
 {{
     config(
         materialized = 'table'

@@ -94,6 +94,9 @@ The agent must use the code in the following folders to understand both the lega
 > **Migration work area only (2025-11-06 · codex-gpt5)**  
 > Treat `/ae-enterprise-dbt`, `/cfin-data-models`, and `/docs` as read-only references during migrations. Draft new SQL, YAML, and documentation inside the relevant `/migrations/<object>/` subdirectory. Move vetted artifacts into the project trees only after review and approval.
 
+> **Migration templates (2025-11-06 · codex-gpt5)**  
+> When creating `analysis.md`, `mapping.md`, `plan.md`, `pull_request.md`, `summary.md`, or additional artifacts, start from the corresponding markdown templates in `/templates/`. Customize placeholders but retain required sections and metadata.
+
 ### Required actions before any change
 
 1. **Inventory structures**
@@ -135,6 +138,8 @@ When initiating a new migration, the agent must create a dedicated workspace and
      * `analysis.md` — legacy object overview, purpose, dependencies, upstream/downstream consumers, outstanding questions.
      * `mapping.md` — column-by-column (or logic block) crosswalk from SQL Server sources to target Snowflake/dbt sources using `source()`/`ref()`. Highlight gaps or assumptions.
      * `plan.md` — proposed migration strategy, dbt model structure, test coverage, validation approach, and rollout steps.
+     * `pull_request.md` — standardized PR description capturing summary, testing notes, validation status, and mapping uncertainties.
+     * `summary.md` — concise business-facing synopsis of the migration outcome, key metrics, and follow-up actions.
 2. **Detailed analysis**
    * Document the legacy SQL (include file path/reference) and enumerate each source table/view, key business rule, filters, aggregations, and edge cases.
    * Record inputs and expected outputs, data volumes, and any performance or scheduling considerations.

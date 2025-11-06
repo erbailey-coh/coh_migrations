@@ -226,3 +226,11 @@ Adhere to these rules to produce code that can be merged with minimal rework.
 ## 12) Migration staging protocol
 
 * 2025-11-06 (codex-gpt5) — Treat `/ae-enterprise-dbt`, `/cfin-data-models`, and `/docs` as reference libraries while designing migrations. Create or revise SQL, YAML, and supporting notes in the active `/migrations/<object>/` workspace until changes are reviewed and approved for promotion into the main projects.
+
+## 13) Standard migration documentation
+
+* 2025-11-06 (codex-gpt5) — Each migration workspace must include `pull_request.md` (standardized PR narrative covering summary, tests, and open questions) and `summary.md` (business-facing highlights and follow-up actions) alongside `analysis.md`, `mapping.md`, and `plan.md`.
+
+## 14) Templates usage
+
+* 2025-11-06 (codex-gpt5) — Use the markdown templates stored in `/templates/` as the starting point for every migration document. Populate placeholders with migration-specific details while preserving required sections and metadata.
